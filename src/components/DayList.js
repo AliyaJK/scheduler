@@ -2,7 +2,8 @@ import React from "react";
 import DayListItem from "components/DayListItem";
 
 export default function DayList(props) {
-  const dayItems = props.days.map((day) => (
+  const dayItems = props.days.map((day) => {
+    return (
     <DayListItem
       key={day.id}
       name={day.name}
@@ -10,7 +11,8 @@ export default function DayList(props) {
       selected={day.name === props.value}
       setDay={props.onChange}
     />
-  ));
+  )
+    });
 
   return <ul>{dayItems}</ul>;
 }
