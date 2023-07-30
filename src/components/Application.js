@@ -5,7 +5,6 @@ import Appointment from "./Appointment";
 import axios from "axios";
 import { getAppointmentsForDay, getInterview } from "helpers/selectors";
 
-
 export default function Application() {
   const [state, setState] = useState({
     day: "Monday",
@@ -14,10 +13,25 @@ export default function Application() {
     interviewers: {}
   });
 
+const setDay = (day) => setState((prevState) => ({ ...prevState, day }));
+
+function bookInterview(id, interview) {
+  const appointment = {
+    ...state.appointments[id],
+    interview: { ...interview }
+  };
+
+const appointments = {
+  ...state.appointments,
+  [id]: appointment
+};
+
+return axios.put(`/api/appointments/${id}`, { interview }).then((response) => {
+  setState((prev) => ({ ...prev, appointments }));
+});
+};
+
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-
-
-  const setDay = day => setState({ ...state, day });
 
   useEffect(() => {
     Promise.all([
@@ -44,6 +58,7 @@ export default function Application() {
         time={appointment.time}
         interview={interview}
         interviewers={state.interviewers}
+        bookInterview={bookInterview}
       />
     );
   });
