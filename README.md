@@ -21,3 +21,8 @@ npm test
 ```sh
 npm run storybook
 ```
+## Screenshots
+
+!["Main interview scheduler page"] (https://github.com/AliyaJK/scheduler/blob/master/docs/schedule.png)
+
+!["Adding an interview appointment"] (https://github.com/AliyaJK/scheduler/blob/master/docs/add-interview.png)
